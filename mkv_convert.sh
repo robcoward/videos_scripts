@@ -46,8 +46,7 @@ do
     echo "ffmpeg -i ${SOURCE_FILE} -y -f $outformat -acodec $acodec -ab 192k -ac 2 -absf aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -profile:v main -level 3.1 -qmax 22 -qmin 20 -x264opts no-cabac:ref=2 -threads 0 ${MP4_FILE}"
     ffmpeg -i ${SOURCE_FILE} -y -f $outformat -acodec $acodec -ab 192k -ac 2 -absf aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -profile:v main -level 3.1 -qmax 22 -qmin 20 -x264opts no-cabac:ref=2 -threads 0 ${MP4_FILE}
 
-
-    ffmpeg -i ${SOURCE_FILE} -vcodec copy -acodec copy ${MP4_FILE}
+    # Replace the original mkv file with an empty placeholder to prevent it being processed again
     echo -n > ${to_convert}
   else
     echo "WARN: Both ${SOURCE_FILE} and ${MP4_FILE} exist in ${SOURCE_DIR}"
