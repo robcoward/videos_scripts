@@ -1,10 +1,8 @@
 #!/bin/bash
 #
 
-IN_FILE=$1
-
-SOURCE_FILE=$(basename $IN_FILE)
-MP4_FILE="$(basename $IN_FILE mkv)mp4"
+SOURCE_FILE=$1
+MP4_FILE=$2
 
 outformat=mp4
 
