@@ -77,8 +77,12 @@ fi
 echo "Converting ${SOURCE_FILE}"
 echo "Video codec: $vcodec Audio codec: $acodec Container: $outformat" 
 
-# using ffmpeg for real converting
-echo "ffmpeg -i ${SOURCE_FILE} -y -f $outformat -acodec $acodec -ab 192k -ac 2 -absf aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -profile:v main -level 3.1 -qmax 22 -qmin 20 -x264opts no-cabac:ref=2 -threads 0 ${MP4_FILE}"
+#FFMPEG_ARG="-y -f $outformat -acodec $acodec -ab 192k -ac 2 -bsf:a aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -profile:v main -level 3.1 -qmax 22 -qmin 20 -x264opts no-cabac:ref=2 -threads 0"
 
-ffmpeg -i ${SOURCE_FILE} -y -f $outformat -acodec $acodec -ab 192k -ac 2 -absf aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -profile:v main -level 3.1 -qmax 22 -qmin 20 -x264opts no-cabac:ref=2 -threads 0 ${MP4_FILE}
+FFMPEG_ARG="-y -f $outformat -acodec $acodec -ab 192k -ac 2 -bsf:a aac_adtstoasc -async 1 -vcodec $vcodec -vsync 0 -x264opts no-cabac:ref=2 -threads 0"
+
+# using ffmpeg for real converting
+echo "ffmpeg -i ${SOURCE_FILE} ${FFMPEG_ARG} ${MP4_FILE}"
+
+ffmpeg -i ${SOURCE_FILE} ${FFMPEG_ARG} ${MP4_FILE}
 
