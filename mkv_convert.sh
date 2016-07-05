@@ -67,11 +67,14 @@ then
   vcodec=libx264
 fi
 
-if [ ffmpeg -i ${SOURCE_FILE} 2>&1 | grep Audio: | grep aac ] || [ 	ffmpeg -i ${SOURCE_FILE} 2>&1 | grep Audio: | grep mp3 ]	#check audio codec
+acodec=libfdk_aac
+if ffmpeg -i ${SOURCE_FILE} 2>&1 | grep Audio: | grep aac
 then
   acodec=copy
-else
-  acodec=libfdk_aac
+fi
+if ffmpeg -i ${SOURCE_FILE} 2>&1 | grep Audio: | grep mp3
+then
+  acodec=copy
 fi
 
 echo "Converting ${SOURCE_FILE}"
